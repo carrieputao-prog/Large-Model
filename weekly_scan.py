@@ -44,6 +44,8 @@ def scan_new_terms(existing_terms):
 - Newsletter：The Batch (Andrew Ng), Import AI, TLDR AI, Latent Space, AlphaSignal
 - Hacker News：AI相关高热帖（评论数>50）
 - arXiv：本周高引AI论文中的新概念
+- 清华姜学长 B站最新视频（搜索："清华姜学长 bilibili 最新视频 2026"）
+- 晓辉博士 B站最新视频（搜索："晓辉博士 bilibili 最新视频 2026"）
 
 以下术语已在词库中，**不要重复推荐**：
 {existing_list}
