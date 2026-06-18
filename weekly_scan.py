@@ -12,12 +12,14 @@ import httpx
 from datetime import date
 
 GEMINI_API_KEY   = os.environ["GEMINI_API_KEY"]
+GITHUB_TOKEN = os.environ["GITHUB_TOKEN"]
+GITHUB_REPO  = "carrieputao-prog/grape-data"
 DINGTALK_WEBHOOK = os.environ["DINGTALK_WEBHOOK"]
 DINGTALK_SECRET  = os.environ["DINGTALK_SECRET"]
 
 BASE_DIR      = os.path.dirname(os.path.abspath(__file__))
 TOPICS_FILE   = os.path.join(BASE_DIR, "topics.json")
-PENDING_FILE  = os.path.join(BASE_DIR, "pending_topics.json")
+
 
 
 def load_json(path):
