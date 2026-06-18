@@ -130,7 +130,7 @@ def generate_knowledge(term, slot, progress_data, topics_data):
 进度：{"█" * (learned * 10 // total)}{"░" * (10 - learned * 10 // total)} {learned * 100 // total}%"""
 
     response = httpx.post(
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+        "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent",
         params={"key": GEMINI_API_KEY},
         json={"contents": [{"parts": [{"text": prompt}]}]},
         timeout=60,
@@ -171,6 +171,50 @@ def send_to_dingtalk(content):
         raise RuntimeError(f"钉钉推送失败: {result}")
 
 
+def save_to_grape_data(content: str, slot: int, date_str: str):
+    """将当次知识卡片追加写入 grape-data/daily-knowledge/YYYY-MM-DD.md"""
+    import base64 as b64
+
+    github_token = os.environ.get("GITHUB_TOKEN", "")
+    if not github_token:
+        print("⚠️ 未设置 GITHUB_TOKEN，跳过保存到 grape-data")
+        return
+
+    github_repo = "carrieputao-prog/grape-data"
+    file_path   = f"daily-knowledge/{date_str}.md"
+    url         = f"https://api.github.com/repos/{github_repo}/contents/{file_path}"
+    headers     = {
+        "Authorization": f"token {github_token}",
+        "Accept": "application/vnd.github.v3+json",
+    }
+
+    # 读取已有内容（如果存在）
+    sha      = None
+    existing = ""
+    check    = httpx.get(url, headers=headers, timeout=30)
+    if check.status_code == 200:
+        sha      = check.json()["sha"]
+        existing = b64.b64decode(check.json()["content"]).decode("utf-8")
+
+    # 追加本次内容，用分隔线隔开
+    slot_label = SLOT_CONFIG[slot]["label"]
+    separator  = f"\n\n---\n\n"
+    new_content = existing + separator + content if existing else content
+
+    payload = {
+        "message": f"📚 Agent2 大模型日课 {date_str} {slot_label}",
+        "content": b64.b64encode(new_content.encode("utf-8")).decode("utf-8"),
+    }
+    if sha:
+        payload["sha"] = sha
+
+    resp = httpx.put(url, headers=headers, json=payload, timeout=30)
+    if resp.status_code in (200, 201):
+        print(f"✅ 已保存到 grape-data/daily-knowledge/{date_str}.md")
+    else:
+        print(f"⚠️ 保存到 grape-data 失败：{resp.status_code} {resp.text}")
+
+
 if __name__ == "__main__":
     topics_data   = load_json(TOPICS_FILE)
     progress_data = load_json(PROGRESS_FILE)
@@ -185,6 +229,10 @@ if __name__ == "__main__":
     print("内容生成完毕，推送中...")
 
     send_to_dingtalk(content)
+
+    print("保存到 grape-data...")
+    today_str = datetime.now().strftime("%Y-%m-%d")
+    save_to_grape_data(content, slot, today_str)
 
     # 22点推送后更新进度
     progress_data = advance_progress(progress_data, topics_data, slot)
