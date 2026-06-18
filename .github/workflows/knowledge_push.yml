@@ -1,0 +1,55 @@
+name: 🍇 葡萄大模型日课
+
+on:
+  schedule:
+    # 北京时间 07:00 = UTC 前一天 23:00
+    - cron: '0 23 * * *'
+    # 北京时间 12:00 = UTC 04:00
+    - cron: '0 4 * * *'
+    # 北京时间 18:00 = UTC 10:00
+    - cron: '0 10 * * *'
+    # 北京时间 22:00 = UTC 14:00
+    - cron: '0 14 * * *'
+  workflow_dispatch:
+    inputs:
+      slot:
+        description: '手动指定时段（7/12/18/22）'
+        required: false
+        default: '7'
+
+jobs:
+  push-knowledge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install httpx
+
+      - name: 推送知识卡片
+        env:
+          GEMINI_API_KEY:   ${{ secrets.GEMINI_API_KEY }}
+          DINGTALK_WEBHOOK: ${{ secrets.DINGTALK_WEBHOOK }}
+          DINGTALK_SECRET:  ${{ secrets.DINGTALK_SECRET }}
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            python knowledge_push.py ${{ github.event.inputs.slot }}
+          else
+            python knowledge_push.py
+          fi
+
+      - name: 提交进度更新
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add progress.json
+          git diff --staged --quiet || git commit -m "📊 更新学习进度 $(date '+%Y-%m-%d %H:%M UTC')"
+          git push
