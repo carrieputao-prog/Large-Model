@@ -28,12 +28,5 @@ jobs:
           GEMINI_API_KEY:   ${{ secrets.GEMINI_API_KEY }}
           DINGTALK_WEBHOOK: ${{ secrets.DINGTALK_WEBHOOK }}
           DINGTALK_SECRET:  ${{ secrets.DINGTALK_SECRET }}
+          GITHUB_TOKEN:     ${{ secrets.GRAPE_DATA_TOKEN }}
         run: python weekly_scan.py
-
-      - name: 提交待审核词条
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add pending_topics.json
-          git diff --staged --quiet || git commit -m "🔍 周五新词巡逻 $(date '+%Y-%m-%d')"
-          git push
