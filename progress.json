@@ -1,8 +1,14 @@
 {
-  "current_index": 0,
+  "current_index": 1,
   "round": 1,
   "total_topics": 91,
   "started_date": "2026-06-18",
   "last_updated": "2026-06-18",
-  "daily_log": []
+  "daily_log": [
+    {
+      "date": "2026-06-18",
+      "index": 0,
+      "term": "Token（词元）"
+    }
+  ]
 }
