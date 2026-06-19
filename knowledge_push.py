@@ -158,7 +158,7 @@ def send_to_dingtalk(content):
     payload = {
         "msgtype": "markdown",
         "markdown": {
-            "title": "🍇 葡萄大模型日课",
+            "title": "🍇 葡萄大模型日课 · AI知识推送",
             "text": content
         }
     }
