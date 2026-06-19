@@ -1,5 +1,5 @@
 {
-  "current_index": 2,
+  "current_index": 3,
   "round": 1,
   "total_topics": 91,
   "started_date": "2026-06-18",
@@ -14,6 +14,11 @@
       "date": "2026-06-19",
       "index": 1,
       "term": "Embedding（向量嵌入）"
+    },
+    {
+      "date": "2026-06-19",
+      "index": 2,
+      "term": "Transformer 架构"
     }
   ]
 }
