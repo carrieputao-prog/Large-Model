@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "last_updated": "2026-06-18",
-  "total_active": 91,
+  "last_updated": "2026-06-19",
+  "total_active": 96,
   "topics": [
     {"id": 1, "term": "Token（词元）", "module": "基础认知层", "status": "active", "added_date": "2026-06-18", "source": "initial"},
     {"id": 2, "term": "Embedding（向量嵌入）", "module": "基础认知层", "status": "active", "added_date": "2026-06-18", "source": "initial"},
@@ -93,6 +93,11 @@
     {"id": 88, "term": "Vibe Coding", "module": "前沿与趋势层", "status": "active", "added_date": "2026-06-18", "source": "initial"},
     {"id": 89, "term": "AI Native 应用", "module": "前沿与趋势层", "status": "active", "added_date": "2026-06-18", "source": "initial"},
     {"id": 90, "term": "小模型 vs 大模型趋势", "module": "前沿与趋势层", "status": "active", "added_date": "2026-06-18", "source": "initial"},
-    {"id": 91, "term": "FDE（AI Forward Deployed Engineer）", "module": "前沿与趋势层", "status": "active", "added_date": "2026-06-18", "source": "user_manual", "note": "Palantir提出：既指嵌入客户现场的AI技术角色，也指在Foundry平台运行的AI交互智能体"}
+    {"id": 91, "term": "FDE（AI Forward Deployed Engineer）", "module": "前沿与趋势层", "status": "active", "added_date": "2026-06-18", "source": "user_manual", "note": "Palantir提出：既指嵌入客户现场的AI技术角色，也指在Foundry平台运行的AI交互智能体"},
+    {"id": 191, "term": "Loop Engineer (循环工程师)", "module": "工程与应用层", "status": "active", "added_date": "2026-06-19", "source": "清华姜学长 B站", "note": "指设计和优化AI系统中循环反馈机制的工程师或方法论。"},
+    {"id": 195, "term": "Long-Lifecycle Agents (长生命周期智能体)", "module": "前沿与趋势层", "status": "active", "added_date": "2026-06-19", "source": "arXiv", "note": "指能够持续探索环境并解决长期任务序列，具有跨领域泛化能力的LLM驱动AI智能体。"},
+    {"id": 200, "term": "前沿AI模型 (Frontier AI Models)", "module": "前沿与趋势层", "status": "active", "added_date": "2026-06-19", "source": "Agent1-早报-2026-06-19", "note": "指的是最先进、能力最强大、开发成本最高的AI模型，它们往往拥有新兴能力，可能带来系统性风险。"},
+    {"id": 201, "term": "AI原生网络 (AI-native networks)", "module": "前沿与趋势层", "status": "active", "added_date": "2026-06-19", "source": "Agent1-早报-2026-06-19", "note": "描述从设计之初就深度融合AI技术，以优化性能、自动化管理并提供智能服务的新一代网络架构。"},
+    {"id": 202, "term": "Mythos级AI模型 (Mythos-level AI model)", "module": "前沿与趋势层", "status": "active", "added_date": "2026-06-19", "source": "Agent1-早报-2026-06-19", "note": "指代像Anthropic Mythos系列那样，能力极为强大且可能具有新兴能力的尖端AI模型分类。"}
   ]
 }
