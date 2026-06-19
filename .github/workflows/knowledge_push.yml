@@ -3,13 +3,13 @@ name: 🍇 葡萄大模型日课
 on:
   schedule:
     # 北京时间 07:00 = UTC 前一天 23:00
-    - cron: '0 23 * * *'
+    - cron: '0 19 * * *'
     # 北京时间 12:00 = UTC 04:00
-    - cron: '0 4 * * *'
+    - cron: '0 0 * * *'
     # 北京时间 18:00 = UTC 10:00
-    - cron: '0 10 * * *'
+    - cron: '0 6 * * *'
     # 北京时间 22:00 = UTC 14:00
-    - cron: '0 14 * * *'
+    - cron: '0 10 * * *'
   workflow_dispatch:
     inputs:
       slot:
