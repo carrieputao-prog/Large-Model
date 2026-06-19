@@ -1,14 +1,19 @@
 {
-  "current_index": 1,
+  "current_index": 2,
   "round": 1,
   "total_topics": 91,
   "started_date": "2026-06-18",
-  "last_updated": "2026-06-18",
+  "last_updated": "2026-06-19",
   "daily_log": [
     {
       "date": "2026-06-18",
       "index": 0,
       "term": "Token（词元）"
+    },
+    {
+      "date": "2026-06-19",
+      "index": 1,
+      "term": "Embedding（向量嵌入）"
     }
   ]
 }
