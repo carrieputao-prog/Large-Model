@@ -13,9 +13,9 @@ on:
   workflow_dispatch:
     inputs:
       slot:
-        description: '手动指定时段（7/12/18/22）'
+        description: '手动指定时段（3/8/14/18）'
         required: false
-        default: '7'
+        default: '3'
 
 jobs:
   push-knowledge:
