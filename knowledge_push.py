@@ -16,15 +16,15 @@ DINGTALK_SECRET  = os.environ["DINGTALK_SECRET"]
 
 # ── 时间段映射（北京时间小时 → 推送风格） ──────────────
 SLOT_CONFIG = {
-    3:  {"label": "晨读", "emoji": "🌅", "style": "偏重概念理解，适合早晨清醒头脑，语言简洁有力"},
-    8: {"label": "午间", "emoji": "☀️", "style": "偏重实际应用和业务举例，适合利用午休快速充电"},
-    14: {"label": "晚间", "emoji": "🌆", "style": "偏重进阶拓展和横向对比，适合下班后深入思考"},
-    18: {"label": "睡前", "emoji": "🌙", "style": "语言轻松有趣，适合睡前回味，结尾可以留一个思考题"},
+    3:  {"label": "晨读", "emoji": "🌅", "slot_no": 0, "style": "偏重概念理解，适合早晨清醒头脑，语言简洁有力"},
+    8:  {"label": "上午", "emoji": "☀️", "slot_no": 1, "style": "偏重实际应用和业务举例，适合上午快速充电"},
+    14: {"label": "下午", "emoji": "🌆", "slot_no": 2, "style": "偏重进阶拓展和横向对比，适合下午深入思考"},
+    18: {"label": "晚间", "emoji": "🌙", "slot_no": 3, "style": "语言轻松有趣，适合傍晚回味，结尾留一个思考题"},
 }
 
 # ── 文件路径 ──────────────────────────────────────────
-BASE_DIR     = os.path.dirname(os.path.abspath(__file__))
-TOPICS_FILE  = os.path.join(BASE_DIR, "topics.json")
+BASE_DIR      = os.path.dirname(os.path.abspath(__file__))
+TOPICS_FILE   = os.path.join(BASE_DIR, "topics.json")
 PROGRESS_FILE = os.path.join(BASE_DIR, "progress.json")
 
 
@@ -40,58 +40,66 @@ def save_json(path, data):
 
 def get_slot():
     """根据当前UTC小时推断北京时间时段"""
-    utc_hour = datetime.utcnow().hour
-    beijing_hour = (utc_hour + 8) % 24
-    # 匹配最接近的时段
-    slots = [3, 8, 14, 18]
-    for s in slots:
-        if abs(beijing_hour - s) <= 1:
-            return s
-    # 命令行手动指定：python knowledge_push.py 7
+    # 命令行手动指定优先：python knowledge_push.py 3
     if len(sys.argv) > 1:
         try:
             return int(sys.argv[1])
         except ValueError:
             pass
-    return 7
+    utc_hour = datetime.utcnow().hour
+    beijing_hour = (utc_hour + 8) % 24
+    slots = [3, 8, 14, 18]
+    for s in slots:
+        if abs(beijing_hour - s) <= 1:
+            return s
+    return 3
 
 
-def get_today_topics(topics_data, progress_data):
-    """获取今日4个词条，每次推送取当前index对应的1个"""
-    active = [t for t in topics_data["topics"] if t["status"] == "active"]
-    total  = len(active)
-    idx    = progress_data["current_index"] % total
-    return active[idx], idx, total
+def get_topic_for_slot(topics_data, progress_data, slot):
+    """
+    方案B：一天4次各推不同词条
+    base_index = current_index * 4（每天消耗4个）
+    slot_no 0/1/2/3 对应当天第1/2/3/4个词
+    """
+    active    = [t for t in topics_data["topics"] if t["status"] == "active"]
+    total     = len(active)
+    slot_no   = SLOT_CONFIG[slot]["slot_no"]
+    base_idx  = progress_data["current_index"] * 4
+    idx       = (base_idx + slot_no) % total
+    learned   = base_idx + slot_no  # 累计已学词数
+    return active[idx], idx, total, learned
 
 
 def advance_progress(progress_data, topics_data, slot):
-    """每天18点推送完后，index+1，记录日志"""
+    """最后一个时段（18点）推送完后，day_index+1"""
     if slot != 18:
-        return progress_data  # 只在最后一个时段才推进
-    active = [t for t in topics_data["topics"] if t["status"] == "active"]
-    total  = len(active)
+        return progress_data
+    active    = [t for t in topics_data["topics"] if t["status"] == "active"]
+    total     = len(active)
     today_str = date.today().isoformat()
+    base_idx  = progress_data["current_index"] * 4
+    # 记录今天学的4个词
+    terms_today = [active[(base_idx + i) % total]["term"] for i in range(4)]
     progress_data["daily_log"].append({
         "date": today_str,
-        "index": progress_data["current_index"],
-        "term": active[progress_data["current_index"] % total]["term"]
+        "day_index": progress_data["current_index"],
+        "terms": terms_today
     })
     progress_data["current_index"] += 1
-    if progress_data["current_index"] >= total:
+    # 每 total//4 天跑完一轮
+    days_per_round = total // 4
+    if progress_data["current_index"] >= days_per_round:
         progress_data["current_index"] = 0
         progress_data["round"] += 1
     progress_data["last_updated"] = today_str
     return progress_data
 
 
-def generate_knowledge(term, slot, progress_data, topics_data):
+def generate_knowledge(term, slot, progress_data, topics_data, learned, total):
     """调用 Gemini API 生成知识卡片"""
-    slot_cfg = SLOT_CONFIG[slot]
-    active   = [t for t in topics_data["topics"] if t["status"] == "active"]
-    total    = len(active)
-    learned  = progress_data["current_index"]
-    remaining = total - learned
+    slot_cfg  = SLOT_CONFIG[slot]
     round_num = progress_data["round"]
+    remaining = total - ((progress_data["current_index"] * 4) + slot_cfg["slot_no"])
 
     round_note = ""
     if round_num > 1:
@@ -126,7 +134,7 @@ def generate_knowledge(term, slot, progress_data, topics_data):
 
 ---
 📊 **学习进度**
-第 {round_num} 轮 · 已学 {learned} / {total} 词 · 还剩 {remaining} 词
+第 {round_num} 轮 · 今日第 {slot_cfg['slot_no']+1}/4 条 · 累计已学 {learned} 词 · 还剩 {remaining} 词
 进度：{"█" * (learned * 10 // total)}{"░" * (10 - learned * 10 // total)} {learned * 100 // total}%"""
 
     response = httpx.post(
@@ -173,8 +181,6 @@ def send_to_dingtalk(content):
 
 def save_to_grape_data(content: str, slot: int, date_str: str):
     """将当次知识卡片追加写入 grape-data/daily-knowledge/YYYY-MM-DD.md"""
-    import base64 as b64
-
     github_token = os.environ.get("GITHUB_TOKEN", "")
     if not github_token:
         print("⚠️ 未设置 GITHUB_TOKEN，跳过保存到 grape-data")
@@ -188,22 +194,19 @@ def save_to_grape_data(content: str, slot: int, date_str: str):
         "Accept": "application/vnd.github.v3+json",
     }
 
-    # 读取已有内容（如果存在）
     sha      = None
     existing = ""
     check    = httpx.get(url, headers=headers, timeout=30)
     if check.status_code == 200:
         sha      = check.json()["sha"]
-        existing = b64.b64decode(check.json()["content"]).decode("utf-8")
+        existing = base64.b64decode(check.json()["content"]).decode("utf-8")
 
-    # 追加本次内容，用分隔线隔开
-    slot_label = SLOT_CONFIG[slot]["label"]
-    separator  = f"\n\n---\n\n"
-    new_content = existing + separator + content if existing else content
+    slot_label  = SLOT_CONFIG[slot]["label"]
+    new_content = existing + "\n\n---\n\n" + content if existing else content
 
     payload = {
         "message": f"📚 Agent2 大模型日课 {date_str} {slot_label}",
-        "content": b64.b64encode(new_content.encode("utf-8")).decode("utf-8"),
+        "content": base64.b64encode(new_content.encode("utf-8")).decode("utf-8"),
     }
     if sha:
         payload["sha"] = sha
@@ -222,10 +225,10 @@ if __name__ == "__main__":
 
     print(f"当前时段：{SLOT_CONFIG[slot]['label']}（北京时间 {slot}:00）")
 
-    topic, idx, total = get_today_topics(topics_data, progress_data)
-    print(f"今日词条：{topic['term']}（第 {idx+1}/{total} 个）")
+    topic, idx, total, learned = get_topic_for_slot(topics_data, progress_data, slot)
+    print(f"今日词条：{topic['term']}（总第 {idx+1}/{total} 个，今日第 {SLOT_CONFIG[slot]['slot_no']+1}/4 条）")
 
-    content = generate_knowledge(topic["term"], slot, progress_data, topics_data)
+    content = generate_knowledge(topic["term"], slot, progress_data, topics_data, learned, total)
     print("内容生成完毕，推送中...")
 
     send_to_dingtalk(content)
@@ -234,7 +237,7 @@ if __name__ == "__main__":
     today_str = datetime.now().strftime("%Y-%m-%d")
     save_to_grape_data(content, slot, today_str)
 
-    # 22点推送后更新进度
+    # 最后一个时段推送完后更新进度
     progress_data = advance_progress(progress_data, topics_data, slot)
     save_json(PROGRESS_FILE, progress_data)
     print("进度已更新")
