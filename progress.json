@@ -1,5 +1,5 @@
 {
-  "current_index": 4,
+  "current_index": 5,
   "round": 1,
   "total_topics": 91,
   "started_date": "2026-06-18",
@@ -24,6 +24,16 @@
       "date": "2026-06-20",
       "index": 3,
       "term": "Attention 机制（注意力）"
+    },
+    {
+      "date": "2026-06-20",
+      "day_index": 4,
+      "terms": [
+        "Batch Size（批大小）",
+        "学习率（Learning Rate）",
+        "归一化（Normalization）",
+        "激活函数（Activation Function）"
+      ]
     }
   ]
 }
