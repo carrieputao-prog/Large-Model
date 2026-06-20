@@ -16,10 +16,10 @@ DINGTALK_SECRET  = os.environ["DINGTALK_SECRET"]
 
 # ── 时间段映射（北京时间小时 → 推送风格） ──────────────
 SLOT_CONFIG = {
-    7:  {"label": "晨读", "emoji": "🌅", "style": "偏重概念理解，适合早晨清醒头脑，语言简洁有力"},
-    12: {"label": "午间", "emoji": "☀️", "style": "偏重实际应用和业务举例，适合利用午休快速充电"},
-    18: {"label": "晚间", "emoji": "🌆", "style": "偏重进阶拓展和横向对比，适合下班后深入思考"},
-    22: {"label": "睡前", "emoji": "🌙", "style": "语言轻松有趣，适合睡前回味，结尾可以留一个思考题"},
+    3:  {"label": "晨读", "emoji": "🌅", "style": "偏重概念理解，适合早晨清醒头脑，语言简洁有力"},
+    8: {"label": "午间", "emoji": "☀️", "style": "偏重实际应用和业务举例，适合利用午休快速充电"},
+    14: {"label": "晚间", "emoji": "🌆", "style": "偏重进阶拓展和横向对比，适合下班后深入思考"},
+    18: {"label": "睡前", "emoji": "🌙", "style": "语言轻松有趣，适合睡前回味，结尾可以留一个思考题"},
 }
 
 # ── 文件路径 ──────────────────────────────────────────
@@ -43,7 +43,7 @@ def get_slot():
     utc_hour = datetime.utcnow().hour
     beijing_hour = (utc_hour + 8) % 24
     # 匹配最接近的时段
-    slots = [7, 12, 18, 22]
+    slots = [3, 8, 14, 18]
     for s in slots:
         if abs(beijing_hour - s) <= 1:
             return s
@@ -65,8 +65,8 @@ def get_today_topics(topics_data, progress_data):
 
 
 def advance_progress(progress_data, topics_data, slot):
-    """每天22点推送完后，index+1，记录日志"""
-    if slot != 22:
+    """每天18点推送完后，index+1，记录日志"""
+    if slot != 18:
         return progress_data  # 只在最后一个时段才推进
     active = [t for t in topics_data["topics"] if t["status"] == "active"]
     total  = len(active)
