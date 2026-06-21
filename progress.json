@@ -1,9 +1,9 @@
 {
-  "current_index": 5,
+  "current_index": 6,
   "round": 1,
   "total_topics": 91,
   "started_date": "2026-06-18",
-  "last_updated": "2026-06-20",
+  "last_updated": "2026-06-21",
   "daily_log": [
     {
       "date": "2026-06-18",
@@ -33,6 +33,16 @@
         "学习率（Learning Rate）",
         "归一化（Normalization）",
         "激活函数（Activation Function）"
+      ]
+    },
+    {
+      "date": "2026-06-21",
+      "day_index": 5,
+      "terms": [
+        "残差连接（Residual Connection）",
+        "层归一化（Layer Norm）",
+        "RLHF（人类反馈强化学习）",
+        "奖励模型（Reward Model）"
       ]
     }
   ]
