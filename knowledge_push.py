@@ -41,7 +41,7 @@ def save_json(path, data):
 def get_slot():
     """根据当前UTC小时推断北京时间时段"""
     # 命令行手动指定优先：python knowledge_push.py 3
-    if len(sys.argv) > 1:
+    if len(sys.argv) > 2:
         try:
             return int(sys.argv[1])
         except ValueError:
