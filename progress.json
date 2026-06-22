@@ -1,9 +1,9 @@
 {
-  "current_index": 6,
+  "current_index": 7,
   "round": 1,
   "total_topics": 91,
   "started_date": "2026-06-18",
-  "last_updated": "2026-06-21",
+  "last_updated": "2026-06-22",
   "daily_log": [
     {
       "date": "2026-06-18",
@@ -43,6 +43,16 @@
         "层归一化（Layer Norm）",
         "RLHF（人类反馈强化学习）",
         "奖励模型（Reward Model）"
+      ]
+    },
+    {
+      "date": "2026-06-22",
+      "day_index": 6,
+      "terms": [
+        "PPO 算法",
+        "DPO（直接偏好优化）",
+        "宪法AI（Constitutional AI）",
+        "指令跟随（Instruction Following）"
       ]
     }
   ]
