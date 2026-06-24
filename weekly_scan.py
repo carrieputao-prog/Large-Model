@@ -19,6 +19,7 @@ GITHUB_REPO      = "carrieputao-prog/grape-data"
 
 BASE_DIR     = os.path.dirname(os.path.abspath(__file__))
 TOPICS_FILE  = os.path.join(BASE_DIR, "topics.json")
+ALLOWED_MODULES = {"基础认知层", "工程与应用层", "前沿与趋势层"}
 
 
 def load_json(path):
@@ -27,7 +28,10 @@ def load_json(path):
 
 
 def get_existing_terms(topics_data):
-    return {t["term"] for t in topics_data["topics"]}
+    return {
+        t["term"] for t in topics_data["topics"]
+        if t.get("module") in ALLOWED_MODULES
+    }
 
 
 def read_pending_from_grape_data():
@@ -85,11 +89,19 @@ def scan_new_terms(existing_terms):
 以下术语已在词库中，**不要重复推荐**：
 {existing_list}
 
+只允许推荐以下三个分类的术语：
+- 基础认知层：大模型入门、核心原理、基础概念
+- 工程与应用层：Prompt、RAG、Agent、部署、成本、企业应用
+- 前沿与趋势层：多模态、推理模型、Agent趋势、AI Native、前沿研究
+
+不要推荐“对齐与训练层”相关术语，例如 RLHF、奖励模型、PPO、DPO、对齐、安全训练、模型微调、量化、剪枝、评估等。
+
 请输出3-5个候选新词，严格按JSON格式返回，不要任何其他内容：
 {{
   "candidates": [
     {{
       "term": "术语名称（中英文）",
+      "module": "基础认知层 / 工程与应用层 / 前沿与趋势层 三选一",
       "brief": "一句话说明这是什么",
       "source": "发现来源（账号/媒体名/博主名）",
       "why_important": "为什么值得加入词库（10字以内）"
@@ -120,14 +132,20 @@ def update_pending(pending_data, candidates, topics_data):
     next_id = max(t["id"] for t in all_topics) + 100
     today = date.today().isoformat()
     existing_pending_terms = {p["term"] for p in pending_data["pending"]}
+    existing_topic_terms = {t["term"] for t in all_topics}
     added = []
 
     for c in candidates:
+        if c.get("module") not in ALLOWED_MODULES:
+            continue
+        if c["term"] in existing_topic_terms:
+            continue
         if c["term"] in existing_pending_terms:
             continue
         entry = {
             "id": next_id,
             "term": c["term"],
+            "module": c["module"],
             "brief": c["brief"],
             "source": c["source"],
             "why_important": c.get("why_important", ""),
@@ -165,6 +183,7 @@ def send_review_notice(added, pending_total):
 
     for i, c in enumerate(added, 1):
         lines.append(f"**{i}. {c['term']}**")
+        lines.append(f"> 分类：{c['module']}")
         lines.append(f"> {c['brief']}")
         lines.append(f"> 来源：{c['source']} · {c.get('why_important', '')}\n")
 

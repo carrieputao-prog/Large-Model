@@ -17,9 +17,7 @@ DINGTALK_SECRET  = os.environ["DINGTALK_SECRET"]
 # ── 时间段映射（北京时间小时 → 推送风格） ──────────────
 SLOT_CONFIG = {
     3:  {"label": "晨读", "emoji": "🌅", "slot_no": 0, "style": "偏重概念理解，适合早晨清醒头脑，语言简洁有力"},
-    8:  {"label": "上午", "emoji": "☀️", "slot_no": 1, "style": "偏重实际应用和业务举例，适合上午快速充电"},
-    14: {"label": "下午", "emoji": "🌆", "slot_no": 2, "style": "偏重进阶拓展和横向对比，适合下午深入思考"},
-    18: {"label": "晚间", "emoji": "🌙", "slot_no": 3, "style": "语言轻松有趣，适合傍晚回味，结尾留一个思考题"},
+    18: {"label": "晚间", "emoji": "🌙", "slot_no": 1, "style": "语言轻松有趣，适合傍晚回味，结尾留一个思考题"},
 }
 
 # ── 文件路径 ──────────────────────────────────────────
@@ -41,30 +39,42 @@ def save_json(path, data):
 def get_slot():
     """根据当前UTC小时推断北京时间时段"""
     # 命令行手动指定优先：python knowledge_push.py 3
-    if len(sys.argv) > 2:
+    if len(sys.argv) > 1:
         try:
-            return int(sys.argv[1])
+            slot = int(sys.argv[1])
+            if slot in SLOT_CONFIG:
+                return slot
+            raise ValueError(f"仅支持时段：{sorted(SLOT_CONFIG)}")
         except ValueError:
-            pass
+            print(f"⚠️ 无效时段参数：{sys.argv[1]}，将按当前时间自动判断")
     utc_hour = datetime.utcnow().hour
     beijing_hour = (utc_hour + 8) % 24
-    slots = [3, 8, 14, 18]
+    slots = sorted(SLOT_CONFIG)
     for s in slots:
         if abs(beijing_hour - s) <= 1:
             return s
     return 3
 
 
+def get_active_topics(topics_data):
+    """只返回当前保留分类下的 active 词条。"""
+    allowed_modules = {"基础认知层", "工程与应用层", "前沿与趋势层"}
+    return [
+        t for t in topics_data["topics"]
+        if t.get("status") == "active" and t.get("module") in allowed_modules
+    ]
+
+
 def get_topic_for_slot(topics_data, progress_data, slot):
     """
-    方案B：一天4次各推不同词条
-    base_index = current_index * 4（每天消耗4个）
-    slot_no 0/1/2/3 对应当天第1/2/3/4个词
+    一天2次各推不同词条。
+    base_index = current_index * 2（每天消耗2个）
+    slot_no 0/1 对应当天第1/2个词
     """
-    active    = [t for t in topics_data["topics"] if t["status"] == "active"]
+    active    = get_active_topics(topics_data)
     total     = len(active)
     slot_no   = SLOT_CONFIG[slot]["slot_no"]
-    base_idx  = progress_data["current_index"] * 4
+    base_idx  = progress_data["current_index"] * len(SLOT_CONFIG)
     idx       = (base_idx + slot_no) % total
     learned   = base_idx + slot_no  # 累计已学词数
     return active[idx], idx, total, learned
@@ -74,20 +84,20 @@ def advance_progress(progress_data, topics_data, slot):
     """最后一个时段（18点）推送完后，day_index+1"""
     if slot != 18:
         return progress_data
-    active    = [t for t in topics_data["topics"] if t["status"] == "active"]
+    active    = get_active_topics(topics_data)
     total     = len(active)
     today_str = date.today().isoformat()
-    base_idx  = progress_data["current_index"] * 4
-    # 记录今天学的4个词
-    terms_today = [active[(base_idx + i) % total]["term"] for i in range(4)]
+    base_idx  = progress_data["current_index"] * len(SLOT_CONFIG)
+    # 记录今天学的2个词
+    terms_today = [active[(base_idx + i) % total]["term"] for i in range(len(SLOT_CONFIG))]
     progress_data["daily_log"].append({
         "date": today_str,
         "day_index": progress_data["current_index"],
         "terms": terms_today
     })
     progress_data["current_index"] += 1
-    # 每 total//4 天跑完一轮
-    days_per_round = total // 4
+    # 每 ceil(total/2) 天跑完一轮
+    days_per_round = (total + len(SLOT_CONFIG) - 1) // len(SLOT_CONFIG)
     if progress_data["current_index"] >= days_per_round:
         progress_data["current_index"] = 0
         progress_data["round"] += 1
@@ -134,7 +144,7 @@ def generate_knowledge(term, slot, progress_data, topics_data, learned, total):
 
 ---
 📊 **学习进度**
-第 {round_num} 轮 · 今日第 {slot_cfg['slot_no']+1}/4 条 · 累计已学 {learned} 词 · 还剩 {remaining} 词
+第 {round_num} 轮 · 今日第 {slot_cfg['slot_no']+1}/2 条 · 累计已学 {learned} 词 · 还剩 {remaining} 词
 进度：{"█" * (learned * 10 // total)}{"░" * (10 - learned * 10 // total)} {learned * 100 // total}%"""
 
     response = httpx.post(
@@ -226,7 +236,7 @@ if __name__ == "__main__":
     print(f"当前时段：{SLOT_CONFIG[slot]['label']}（北京时间 {slot}:00）")
 
     topic, idx, total, learned = get_topic_for_slot(topics_data, progress_data, slot)
-    print(f"今日词条：{topic['term']}（总第 {idx+1}/{total} 个，今日第 {SLOT_CONFIG[slot]['slot_no']+1}/4 条）")
+    print(f"今日词条：{topic['term']}（总第 {idx+1}/{total} 个，今日第 {SLOT_CONFIG[slot]['slot_no']+1}/2 条）")
 
     content = generate_knowledge(topic["term"], slot, progress_data, topics_data, learned, total)
     print("内容生成完毕，推送中...")
