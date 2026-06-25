@@ -1,5 +1,10 @@
 {
   "current_index": 6,
+  "module_indexes": {
+    "基础认知层": 6,
+    "工程与应用层": 6,
+    "前沿与趋势层": 6
+  },
   "round": 1,
   "total_topics": 74,
   "started_date": "2026-06-18",

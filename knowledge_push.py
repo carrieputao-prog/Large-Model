@@ -16,9 +16,11 @@ DINGTALK_SECRET  = os.environ["DINGTALK_SECRET"]
 
 # ── 时间段映射（北京时间小时 → 推送风格） ──────────────
 SLOT_CONFIG = {
-    3:  {"label": "晨读", "emoji": "🌅", "slot_no": 0, "style": "偏重概念理解，适合早晨清醒头脑，语言简洁有力"},
-    18: {"label": "晚间", "emoji": "🌙", "slot_no": 1, "style": "语言轻松有趣，适合傍晚回味，结尾留一个思考题"},
+    3:  {"label": "晨读", "emoji": "🌅", "module": "基础认知层", "style": "偏重概念理解，适合早晨清醒头脑，语言简洁有力"},
+    12: {"label": "午间", "emoji": "☀️", "module": "工程与应用层", "style": "偏重实际应用和业务举例，适合中午快速充电"},
+    18: {"label": "晚间", "emoji": "🌙", "module": "前沿与趋势层", "style": "语言轻松有趣，适合傍晚回味，结尾留一个思考题"},
 }
+ALLOWED_MODULES = ["基础认知层", "工程与应用层", "前沿与趋势层"]
 
 # ── 文件路径 ──────────────────────────────────────────
 BASE_DIR      = os.path.dirname(os.path.abspath(__file__))
@@ -58,58 +60,90 @@ def get_slot():
 
 def get_active_topics(topics_data):
     """只返回当前保留分类下的 active 词条。"""
-    allowed_modules = {"基础认知层", "工程与应用层", "前沿与趋势层"}
     return [
         t for t in topics_data["topics"]
-        if t.get("status") == "active" and t.get("module") in allowed_modules
+        if t.get("status") == "active" and t.get("module") in ALLOWED_MODULES
     ]
+
+
+def get_topics_by_module(topics_data):
+    """按保留分类拆分 active 词条，保持 topics.json 中的原始顺序。"""
+    topics_by_module = {module: [] for module in ALLOWED_MODULES}
+    for topic in get_active_topics(topics_data):
+        topics_by_module[topic["module"]].append(topic)
+    return topics_by_module
+
+
+def get_module_indexes(progress_data):
+    """兼容旧进度文件：没有 module_indexes 时，用 current_index 初始化三个分类。"""
+    fallback_index = progress_data.get("current_index", 0)
+    module_indexes = progress_data.setdefault("module_indexes", {})
+    for module in ALLOWED_MODULES:
+        module_indexes.setdefault(module, fallback_index)
+    return module_indexes
 
 
 def get_topic_for_slot(topics_data, progress_data, slot):
     """
-    一天2次各推不同词条。
-    base_index = current_index * 2（每天消耗2个）
-    slot_no 0/1 对应当天第1/2个词
+    一天3次，每个时段固定推一个分类：
+    03:00 基础认知层、12:00 工程与应用层、18:00 前沿与趋势层。
+    每个分类独立维护取词索引。
     """
-    active    = get_active_topics(topics_data)
-    total     = len(active)
-    slot_no   = SLOT_CONFIG[slot]["slot_no"]
-    base_idx  = progress_data["current_index"] * len(SLOT_CONFIG)
-    idx       = (base_idx + slot_no) % total
-    learned   = base_idx + slot_no  # 累计已学词数
-    return active[idx], idx, total, learned
+    module = SLOT_CONFIG[slot]["module"]
+    topics_by_module = get_topics_by_module(topics_data)
+    module_topics = topics_by_module[module]
+    if not module_topics:
+        raise RuntimeError(f"分类 {module} 没有 active 词条")
+
+    module_indexes = get_module_indexes(progress_data)
+    raw_idx = module_indexes[module]
+    idx = raw_idx % len(module_topics)
+    learned = idx + 1
+    return module_topics[idx], idx, len(module_topics), learned
 
 
 def advance_progress(progress_data, topics_data, slot):
     """最后一个时段（18点）推送完后，day_index+1"""
     if slot != 18:
         return progress_data
-    active    = get_active_topics(topics_data)
-    total     = len(active)
     today_str = date.today().isoformat()
-    base_idx  = progress_data["current_index"] * len(SLOT_CONFIG)
-    # 记录今天学的2个词
-    terms_today = [active[(base_idx + i) % total]["term"] for i in range(len(SLOT_CONFIG))]
+    topics_by_module = get_topics_by_module(topics_data)
+    module_indexes = get_module_indexes(progress_data)
+    terms_today = []
+    for module in ALLOWED_MODULES:
+        module_topics = topics_by_module[module]
+        idx = module_indexes[module] % len(module_topics)
+        topic = module_topics[idx]
+        terms_today.append({
+            "module": module,
+            "term": topic["term"]
+        })
+        module_indexes[module] += 1
+
     progress_data["daily_log"].append({
         "date": today_str,
         "day_index": progress_data["current_index"],
         "terms": terms_today
     })
     progress_data["current_index"] += 1
-    # 每 ceil(total/2) 天跑完一轮
-    days_per_round = (total + len(SLOT_CONFIG) - 1) // len(SLOT_CONFIG)
+    # 三个分类独立轮转，最长分类跑完视作一轮完成
+    days_per_round = max(len(items) for items in topics_by_module.values())
     if progress_data["current_index"] >= days_per_round:
         progress_data["current_index"] = 0
         progress_data["round"] += 1
+        for module in ALLOWED_MODULES:
+            module_indexes[module] = 0
     progress_data["last_updated"] = today_str
     return progress_data
 
 
-def generate_knowledge(term, slot, progress_data, topics_data, learned, total):
+def generate_knowledge(topic, slot, progress_data, topics_data, learned, total):
     """调用 Gemini API 生成知识卡片"""
     slot_cfg  = SLOT_CONFIG[slot]
+    term      = topic["term"]
+    module    = topic["module"]
     round_num = progress_data["round"]
-    remaining = total - ((progress_data["current_index"] * 4) + slot_cfg["slot_no"])
+    remaining = max(total - learned, 0)
 
     round_note = ""
     if round_num > 1:
@@ -117,7 +151,7 @@ def generate_knowledge(term, slot, progress_data, topics_data, learned, total):
 
     prompt = f"""你是一位大模型领域的资深讲师，现在需要给一位从事ToB业务的AI产品销售/BD讲解一个知识点。
 
-今日词条：**{term}**
+今日词条：**{term}｜{module}**
 推送时段：{slot_cfg['label']}（{slot_cfg['style']}）
 {round_note}
 
@@ -125,7 +159,7 @@ def generate_knowledge(term, slot, progress_data, topics_data, learned, total):
 
 {slot_cfg['emoji']} 葡萄大模型日课 · {slot_cfg['label']}
 
-📌 **{term}**
+📌 **{term}｜{module}**
 
 📖 **定义**
 用1-2句话给出准确定义。
@@ -144,7 +178,7 @@ def generate_knowledge(term, slot, progress_data, topics_data, learned, total):
 
 ---
 📊 **学习进度**
-第 {round_num} 轮 · 今日第 {slot_cfg['slot_no']+1}/2 条 · 累计已学 {learned} 词 · 还剩 {remaining} 词
+第 {round_num} 轮 · {module} · 本分类已学 {learned} 词 · 本分类还剩 {remaining} 词
 进度：{"█" * (learned * 10 // total)}{"░" * (10 - learned * 10 // total)} {learned * 100 // total}%"""
 
     response = httpx.post(
@@ -233,12 +267,12 @@ if __name__ == "__main__":
     progress_data = load_json(PROGRESS_FILE)
     slot          = get_slot()
 
-    print(f"当前时段：{SLOT_CONFIG[slot]['label']}（北京时间 {slot}:00）")
+    print(f"当前时段：{SLOT_CONFIG[slot]['label']}（北京时间 {slot}:00，{SLOT_CONFIG[slot]['module']}）")
 
     topic, idx, total, learned = get_topic_for_slot(topics_data, progress_data, slot)
-    print(f"今日词条：{topic['term']}（总第 {idx+1}/{total} 个，今日第 {SLOT_CONFIG[slot]['slot_no']+1}/2 条）")
+    print(f"今日词条：{topic['term']}｜{topic['module']}（本分类第 {idx+1}/{total} 个）")
 
-    content = generate_knowledge(topic["term"], slot, progress_data, topics_data, learned, total)
+    content = generate_knowledge(topic, slot, progress_data, topics_data, learned, total)
     print("内容生成完毕，推送中...")
 
     send_to_dingtalk(content)
