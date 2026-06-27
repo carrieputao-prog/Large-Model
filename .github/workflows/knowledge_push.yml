@@ -40,10 +40,17 @@ jobs:
           GITHUB_TOKEN:     ${{ secrets.GRAPE_DATA_TOKEN }}
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            python knowledge_push.py ${{ github.event.inputs.slot }}
+            SLOT="${{ github.event.inputs.slot }}"
           else
-            python knowledge_push.py
+            case "${{ github.event.schedule }}" in
+              "0 19 * * *") SLOT="3" ;;
+              "0 4 * * *")  SLOT="12" ;;
+              "0 10 * * *") SLOT="18" ;;
+              *) echo "未知 schedule: ${{ github.event.schedule }}"; exit 1 ;;
+            esac
           fi
+          echo "使用时段: ${SLOT}"
+          python knowledge_push.py "${SLOT}"
 
       - name: 提交进度更新
         run: |

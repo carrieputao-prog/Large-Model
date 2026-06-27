@@ -7,7 +7,8 @@ import base64
 import urllib.parse
 import httpx
 import sys
-from datetime import datetime, date
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 # ── 环境变量 ──────────────────────────────────────────
 GEMINI_API_KEY   = os.environ["GEMINI_API_KEY"]
@@ -26,6 +27,7 @@ ALLOWED_MODULES = ["基础认知层", "工程与应用层", "前沿与趋势层"
 BASE_DIR      = os.path.dirname(os.path.abspath(__file__))
 TOPICS_FILE   = os.path.join(BASE_DIR, "topics.json")
 PROGRESS_FILE = os.path.join(BASE_DIR, "progress.json")
+BEIJING_TZ = ZoneInfo("Asia/Shanghai")
 
 
 def load_json(path):
@@ -36,6 +38,10 @@ def load_json(path):
 def save_json(path, data):
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
+
+
+def beijing_today():
+    return datetime.now(BEIJING_TZ).date().isoformat()
 
 
 def get_slot():
@@ -106,7 +112,7 @@ def advance_progress(progress_data, topics_data, slot):
     """最后一个时段（18点）推送完后，day_index+1"""
     if slot != 18:
         return progress_data
-    today_str = date.today().isoformat()
+    today_str = beijing_today()
     topics_by_module = get_topics_by_module(topics_data)
     module_indexes = get_module_indexes(progress_data)
     terms_today = []
@@ -278,7 +284,7 @@ if __name__ == "__main__":
     send_to_dingtalk(content)
 
     print("保存到 grape-data...")
-    today_str = datetime.now().strftime("%Y-%m-%d")
+    today_str = beijing_today()
     save_to_grape_data(content, slot, today_str)
 
     # 最后一个时段推送完后更新进度
