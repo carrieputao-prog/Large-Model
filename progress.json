@@ -1,14 +1,14 @@
 {
-  "current_index": 6,
+  "current_index": 7,
   "module_indexes": {
-    "基础认知层": 6,
-    "工程与应用层": 6,
-    "前沿与趋势层": 6
+    "基础认知层": 7,
+    "工程与应用层": 7,
+    "前沿与趋势层": 7
   },
   "round": 1,
   "total_topics": 74,
   "started_date": "2026-06-18",
-  "last_updated": "2026-06-23",
+  "last_updated": "2026-06-27",
   "daily_log": [
     {
       "date": "2026-06-18",
@@ -58,6 +58,24 @@
         "DPO（直接偏好优化）",
         "宪法AI（Constitutional AI）",
         "指令跟随（Instruction Following）"
+      ]
+    },
+    {
+      "date": "2026-06-27",
+      "day_index": 6,
+      "terms": [
+        {
+          "module": "基础认知层",
+          "term": "预训练（Pre-training）"
+        },
+        {
+          "module": "工程与应用层",
+          "term": "RAG（检索增强生成）"
+        },
+        {
+          "module": "前沿与趋势层",
+          "term": "具身智能（Embodied AI）"
+        }
       ]
     }
   ]
