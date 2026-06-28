@@ -1,14 +1,14 @@
 {
-  "current_index": 7,
+  "current_index": 8,
   "module_indexes": {
-    "基础认知层": 7,
-    "工程与应用层": 7,
-    "前沿与趋势层": 7
+    "基础认知层": 8,
+    "工程与应用层": 8,
+    "前沿与趋势层": 8
   },
   "round": 1,
   "total_topics": 74,
   "started_date": "2026-06-18",
-  "last_updated": "2026-06-27",
+  "last_updated": "2026-06-28",
   "daily_log": [
     {
       "date": "2026-06-18",
@@ -75,6 +75,24 @@
         {
           "module": "前沿与趋势层",
           "term": "具身智能（Embodied AI）"
+        }
+      ]
+    },
+    {
+      "date": "2026-06-28",
+      "day_index": 7,
+      "terms": [
+        {
+          "module": "基础认知层",
+          "term": "监督微调（SFT）"
+        },
+        {
+          "module": "工程与应用层",
+          "term": "向量数据库"
+        },
+        {
+          "module": "前沿与趋势层",
+          "term": "世界模型（World Model）"
         }
       ]
     }
