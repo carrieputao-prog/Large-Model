@@ -1,14 +1,14 @@
 {
-  "current_index": 8,
+  "current_index": 9,
   "module_indexes": {
-    "基础认知层": 8,
-    "工程与应用层": 8,
-    "前沿与趋势层": 8
+    "基础认知层": 9,
+    "工程与应用层": 9,
+    "前沿与趋势层": 9
   },
   "round": 1,
   "total_topics": 74,
   "started_date": "2026-06-18",
-  "last_updated": "2026-06-28",
+  "last_updated": "2026-06-29",
   "daily_log": [
     {
       "date": "2026-06-18",
@@ -93,6 +93,24 @@
         {
           "module": "前沿与趋势层",
           "term": "世界模型（World Model）"
+        }
+      ]
+    },
+    {
+      "date": "2026-06-29",
+      "day_index": 8,
+      "terms": [
+        {
+          "module": "基础认知层",
+          "term": "上下文窗口（Context Window）"
+        },
+        {
+          "module": "工程与应用层",
+          "term": "语义搜索 vs 关键词搜索"
+        },
+        {
+          "module": "前沿与趋势层",
+          "term": "MCP 协议"
         }
       ]
     }
