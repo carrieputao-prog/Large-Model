@@ -1,14 +1,14 @@
 {
-  "current_index": 9,
+  "current_index": 10,
   "module_indexes": {
-    "基础认知层": 9,
-    "工程与应用层": 9,
-    "前沿与趋势层": 9
+    "基础认知层": 10,
+    "工程与应用层": 10,
+    "前沿与趋势层": 10
   },
   "round": 1,
   "total_topics": 74,
   "started_date": "2026-06-18",
-  "last_updated": "2026-06-29",
+  "last_updated": "2026-06-30",
   "daily_log": [
     {
       "date": "2026-06-18",
@@ -111,6 +111,24 @@
         {
           "module": "前沿与趋势层",
           "term": "MCP 协议"
+        }
+      ]
+    },
+    {
+      "date": "2026-06-30",
+      "day_index": 9,
+      "terms": [
+        {
+          "module": "基础认知层",
+          "term": "温度参数（Temperature）"
+        },
+        {
+          "module": "工程与应用层",
+          "term": "Reranker（重排序）"
+        },
+        {
+          "module": "前沿与趋势层",
+          "term": "Computer Use（计算机使用）"
         }
       ]
     }
