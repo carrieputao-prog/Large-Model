@@ -1,14 +1,14 @@
 {
-  "current_index": 10,
+  "current_index": 11,
   "module_indexes": {
-    "基础认知层": 10,
-    "工程与应用层": 10,
-    "前沿与趋势层": 10
+    "基础认知层": 11,
+    "工程与应用层": 11,
+    "前沿与趋势层": 11
   },
   "round": 1,
   "total_topics": 74,
   "started_date": "2026-06-18",
-  "last_updated": "2026-06-30",
+  "last_updated": "2026-07-01",
   "daily_log": [
     {
       "date": "2026-06-18",
@@ -129,6 +129,24 @@
         {
           "module": "前沿与趋势层",
           "term": "Computer Use（计算机使用）"
+        }
+      ]
+    },
+    {
+      "date": "2026-07-01",
+      "day_index": 10,
+      "terms": [
+        {
+          "module": "基础认知层",
+          "term": "Top-P 采样"
+        },
+        {
+          "module": "工程与应用层",
+          "term": "Function Calling"
+        },
+        {
+          "module": "前沿与趋势层",
+          "term": "Deep Research（深度研究）"
         }
       ]
     }
