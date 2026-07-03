@@ -1,14 +1,14 @@
 {
-  "current_index": 12,
+  "current_index": 13,
   "module_indexes": {
-    "基础认知层": 12,
-    "工程与应用层": 12,
-    "前沿与趋势层": 12
+    "基础认知层": 13,
+    "工程与应用层": 13,
+    "前沿与趋势层": 13
   },
   "round": 1,
   "total_topics": 74,
   "started_date": "2026-06-18",
-  "last_updated": "2026-07-02",
+  "last_updated": "2026-07-03",
   "daily_log": [
     {
       "date": "2026-06-18",
@@ -165,6 +165,24 @@
         {
           "module": "前沿与趋势层",
           "term": "推理模型（Reasoning Model）"
+        }
+      ]
+    },
+    {
+      "date": "2026-07-03",
+      "day_index": 12,
+      "terms": [
+        {
+          "module": "基础认知层",
+          "term": "Softmax 函数"
+        },
+        {
+          "module": "工程与应用层",
+          "term": "Agent（智能体）"
+        },
+        {
+          "module": "前沿与趋势层",
+          "term": "测试时计算（Test-Time Compute）"
         }
       ]
     }
