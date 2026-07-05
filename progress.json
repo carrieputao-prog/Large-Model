@@ -1,14 +1,14 @@
 {
-  "current_index": 14,
+  "current_index": 15,
   "module_indexes": {
-    "基础认知层": 14,
-    "工程与应用层": 14,
-    "前沿与趋势层": 14
+    "基础认知层": 15,
+    "工程与应用层": 15,
+    "前沿与趋势层": 15
   },
   "round": 1,
   "total_topics": 74,
   "started_date": "2026-06-18",
-  "last_updated": "2026-07-04",
+  "last_updated": "2026-07-05",
   "daily_log": [
     {
       "date": "2026-06-18",
@@ -201,6 +201,24 @@
         {
           "module": "前沿与趋势层",
           "term": "强化学习推理（RL for Reasoning）"
+        }
+      ]
+    },
+    {
+      "date": "2026-07-05",
+      "day_index": 14,
+      "terms": [
+        {
+          "module": "基础认知层",
+          "term": "梯度下降"
+        },
+        {
+          "module": "工程与应用层",
+          "term": "记忆机制（Memory）"
+        },
+        {
+          "module": "前沿与趋势层",
+          "term": "长思维链（Long CoT）"
         }
       ]
     }
