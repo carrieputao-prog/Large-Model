@@ -1,14 +1,14 @@
 {
-  "current_index": 15,
+  "current_index": 16,
   "module_indexes": {
-    "基础认知层": 15,
-    "工程与应用层": 15,
-    "前沿与趋势层": 15
+    "基础认知层": 16,
+    "工程与应用层": 16,
+    "前沿与趋势层": 16
   },
   "round": 1,
   "total_topics": 74,
   "started_date": "2026-06-18",
-  "last_updated": "2026-07-05",
+  "last_updated": "2026-07-06",
   "daily_log": [
     {
       "date": "2026-06-18",
@@ -219,6 +219,24 @@
         {
           "module": "前沿与趋势层",
           "term": "长思维链（Long CoT）"
+        }
+      ]
+    },
+    {
+      "date": "2026-07-06",
+      "day_index": 15,
+      "terms": [
+        {
+          "module": "基础认知层",
+          "term": "过拟合 vs 欠拟合"
+        },
+        {
+          "module": "工程与应用层",
+          "term": "长上下文 vs RAG"
+        },
+        {
+          "module": "前沿与趋势层",
+          "term": "上下文学习（In-context Learning）"
         }
       ]
     }
