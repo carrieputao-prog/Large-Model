@@ -1,14 +1,14 @@
 {
-  "current_index": 17,
+  "current_index": 18,
   "module_indexes": {
-    "基础认知层": 17,
-    "工程与应用层": 17,
-    "前沿与趋势层": 17
+    "基础认知层": 18,
+    "工程与应用层": 18,
+    "前沿与趋势层": 18
   },
   "round": 1,
   "total_topics": 74,
   "started_date": "2026-06-18",
-  "last_updated": "2026-07-07",
+  "last_updated": "2026-07-09",
   "daily_log": [
     {
       "date": "2026-06-18",
@@ -255,6 +255,24 @@
         {
           "module": "前沿与趋势层",
           "term": "知识图谱 + LLM"
+        }
+      ]
+    },
+    {
+      "date": "2026-07-09",
+      "day_index": 17,
+      "terms": [
+        {
+          "module": "基础认知层",
+          "term": "学习率（Learning Rate）"
+        },
+        {
+          "module": "工程与应用层",
+          "term": "结构化输出（Structured Output）"
+        },
+        {
+          "module": "前沿与趋势层",
+          "term": "3DGS（三维高斯溅射）"
         }
       ]
     }
