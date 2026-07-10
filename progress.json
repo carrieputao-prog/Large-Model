@@ -1,14 +1,14 @@
 {
-  "current_index": 18,
+  "current_index": 19,
   "module_indexes": {
-    "基础认知层": 18,
-    "工程与应用层": 18,
-    "前沿与趋势层": 18
+    "基础认知层": 19,
+    "工程与应用层": 19,
+    "前沿与趋势层": 19
   },
   "round": 1,
   "total_topics": 74,
   "started_date": "2026-06-18",
-  "last_updated": "2026-07-09",
+  "last_updated": "2026-07-10",
   "daily_log": [
     {
       "date": "2026-06-18",
@@ -273,6 +273,24 @@
         {
           "module": "前沿与趋势层",
           "term": "3DGS（三维高斯溅射）"
+        }
+      ]
+    },
+    {
+      "date": "2026-07-10",
+      "day_index": 18,
+      "terms": [
+        {
+          "module": "基础认知层",
+          "term": "归一化（Normalization）"
+        },
+        {
+          "module": "工程与应用层",
+          "term": "模型路由（Model Routing）"
+        },
+        {
+          "module": "前沿与趋势层",
+          "term": "NeRF（神经辐射场）"
         }
       ]
     }
