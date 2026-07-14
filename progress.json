@@ -1,14 +1,14 @@
 {
-  "current_index": 22,
+  "current_index": 23,
   "module_indexes": {
-    "基础认知层": 22,
-    "工程与应用层": 22,
-    "前沿与趋势层": 22
+    "基础认知层": 23,
+    "工程与应用层": 23,
+    "前沿与趋势层": 23
   },
   "round": 1,
   "total_topics": 74,
   "started_date": "2026-06-18",
-  "last_updated": "2026-07-13",
+  "last_updated": "2026-07-14",
   "daily_log": [
     {
       "date": "2026-06-18",
@@ -345,6 +345,24 @@
         {
           "module": "前沿与趋势层",
           "term": "AI Native 应用"
+        }
+      ]
+    },
+    {
+      "date": "2026-07-14",
+      "day_index": 22,
+      "terms": [
+        {
+          "module": "基础认知层",
+          "term": "Token（词元）"
+        },
+        {
+          "module": "工程与应用层",
+          "term": "成本优化"
+        },
+        {
+          "module": "前沿与趋势层",
+          "term": "小模型 vs 大模型趋势"
         }
       ]
     }
