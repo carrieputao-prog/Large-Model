@@ -1,14 +1,14 @@
 {
-  "current_index": 23,
+  "current_index": 24,
   "module_indexes": {
-    "基础认知层": 23,
-    "工程与应用层": 23,
-    "前沿与趋势层": 23
+    "基础认知层": 24,
+    "工程与应用层": 24,
+    "前沿与趋势层": 24
   },
   "round": 1,
   "total_topics": 74,
   "started_date": "2026-06-18",
-  "last_updated": "2026-07-14",
+  "last_updated": "2026-07-15",
   "daily_log": [
     {
       "date": "2026-06-18",
@@ -363,6 +363,24 @@
         {
           "module": "前沿与趋势层",
           "term": "小模型 vs 大模型趋势"
+        }
+      ]
+    },
+    {
+      "date": "2026-07-15",
+      "day_index": 23,
+      "terms": [
+        {
+          "module": "基础认知层",
+          "term": "Embedding（向量嵌入）"
+        },
+        {
+          "module": "工程与应用层",
+          "term": "Loop Engineer (循环工程师)"
+        },
+        {
+          "module": "前沿与趋势层",
+          "term": "FDE（AI Forward Deployed Engineer）"
         }
       ]
     }
