@@ -1,14 +1,14 @@
 {
-  "current_index": 24,
+  "current_index": 25,
   "module_indexes": {
-    "基础认知层": 24,
-    "工程与应用层": 24,
-    "前沿与趋势层": 24
+    "基础认知层": 25,
+    "工程与应用层": 25,
+    "前沿与趋势层": 25
   },
   "round": 1,
   "total_topics": 74,
   "started_date": "2026-06-18",
-  "last_updated": "2026-07-15",
+  "last_updated": "2026-07-16",
   "daily_log": [
     {
       "date": "2026-06-18",
@@ -381,6 +381,24 @@
         {
           "module": "前沿与趋势层",
           "term": "FDE（AI Forward Deployed Engineer）"
+        }
+      ]
+    },
+    {
+      "date": "2026-07-16",
+      "day_index": 24,
+      "terms": [
+        {
+          "module": "基础认知层",
+          "term": "Transformer 架构"
+        },
+        {
+          "module": "工程与应用层",
+          "term": "Prompt Engineering（提示工程）"
+        },
+        {
+          "module": "前沿与趋势层",
+          "term": "Long-Lifecycle Agents (长生命周期智能体)"
         }
       ]
     }
