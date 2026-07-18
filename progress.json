@@ -1,14 +1,14 @@
 {
-  "current_index": 26,
+  "current_index": 27,
   "module_indexes": {
-    "基础认知层": 26,
-    "工程与应用层": 26,
-    "前沿与趋势层": 26
+    "基础认知层": 27,
+    "工程与应用层": 27,
+    "前沿与趋势层": 27
   },
   "round": 1,
   "total_topics": 74,
   "started_date": "2026-06-18",
-  "last_updated": "2026-07-17",
+  "last_updated": "2026-07-18",
   "daily_log": [
     {
       "date": "2026-06-18",
@@ -417,6 +417,24 @@
         {
           "module": "前沿与趋势层",
           "term": "前沿AI模型 (Frontier AI Models)"
+        }
+      ]
+    },
+    {
+      "date": "2026-07-18",
+      "day_index": 26,
+      "terms": [
+        {
+          "module": "基础认知层",
+          "term": "Self-Attention（自注意力）"
+        },
+        {
+          "module": "工程与应用层",
+          "term": "Few-shot 提示"
+        },
+        {
+          "module": "前沿与趋势层",
+          "term": "AI原生网络 (AI-native networks)"
         }
       ]
     }
