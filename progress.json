@@ -1,14 +1,14 @@
 {
-  "current_index": 0,
+  "current_index": 1,
   "module_indexes": {
-    "基础认知层": 0,
-    "工程与应用层": 0,
-    "前沿与趋势层": 0
+    "基础认知层": 1,
+    "工程与应用层": 1,
+    "前沿与趋势层": 1
   },
   "round": 2,
   "total_topics": 74,
   "started_date": "2026-06-18",
-  "last_updated": "2026-07-19",
+  "last_updated": "2026-07-20",
   "daily_log": [
     {
       "date": "2026-06-18",
@@ -453,6 +453,24 @@
         {
           "module": "前沿与趋势层",
           "term": "Mythos级AI模型 (Mythos-level AI model)"
+        }
+      ]
+    },
+    {
+      "date": "2026-07-20",
+      "day_index": 0,
+      "terms": [
+        {
+          "module": "基础认知层",
+          "term": "Token（词元）"
+        },
+        {
+          "module": "工程与应用层",
+          "term": "Prompt Engineering（提示工程）"
+        },
+        {
+          "module": "前沿与趋势层",
+          "term": "MoE（混合专家模型）"
         }
       ]
     }
