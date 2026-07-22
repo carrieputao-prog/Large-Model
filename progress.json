@@ -1,14 +1,14 @@
 {
-  "current_index": 2,
+  "current_index": 3,
   "module_indexes": {
-    "基础认知层": 2,
-    "工程与应用层": 2,
-    "前沿与趋势层": 2
+    "基础认知层": 3,
+    "工程与应用层": 3,
+    "前沿与趋势层": 3
   },
   "round": 2,
   "total_topics": 74,
   "started_date": "2026-06-18",
-  "last_updated": "2026-07-21",
+  "last_updated": "2026-07-22",
   "daily_log": [
     {
       "date": "2026-06-18",
@@ -489,6 +489,24 @@
         {
           "module": "前沿与趋势层",
           "term": "多模态（Multimodal）"
+        }
+      ]
+    },
+    {
+      "date": "2026-07-22",
+      "day_index": 2,
+      "terms": [
+        {
+          "module": "基础认知层",
+          "term": "Transformer 架构"
+        },
+        {
+          "module": "工程与应用层",
+          "term": "Few-shot 提示"
+        },
+        {
+          "module": "前沿与趋势层",
+          "term": "视觉语言模型（VLM）"
         }
       ]
     }
