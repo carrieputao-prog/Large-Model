@@ -1,14 +1,14 @@
 {
-  "current_index": 4,
+  "current_index": 5,
   "module_indexes": {
-    "基础认知层": 4,
-    "工程与应用层": 4,
-    "前沿与趋势层": 4
+    "基础认知层": 5,
+    "工程与应用层": 5,
+    "前沿与趋势层": 5
   },
   "round": 2,
   "total_topics": 74,
   "started_date": "2026-06-18",
-  "last_updated": "2026-08-01",
+  "last_updated": "2026-08-02",
   "daily_log": [
     {
       "date": "2026-06-18",
@@ -525,6 +525,24 @@
         {
           "module": "前沿与趋势层",
           "term": "文生图（Text-to-Image）"
+        }
+      ]
+    },
+    {
+      "date": "2026-08-02",
+      "day_index": 4,
+      "terms": [
+        {
+          "module": "基础认知层",
+          "term": "Self-Attention（自注意力）"
+        },
+        {
+          "module": "工程与应用层",
+          "term": "思维链（Chain of Thought）"
+        },
+        {
+          "module": "前沿与趋势层",
+          "term": "扩散模型（Diffusion Model）"
         }
       ]
     }
