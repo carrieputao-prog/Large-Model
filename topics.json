@@ -74,8 +74,29 @@
     {"id": 91, "term": "FDE（AI Forward Deployed Engineer）", "module": "前沿与趋势层", "status": "active", "added_date": "2026-06-18", "source": "user_manual", "note": "Palantir提出：既指嵌入客户现场的AI技术角色，也指在Foundry平台运行的AI交互智能体"},
     {"id": 92, "term": "Loop Engineer (循环工程师)", "module": "工程与应用层", "status": "active", "added_date": "2026-06-19", "source": "清华姜学长 B站", "note": "指设计和优化AI系统中循环反馈机制的工程师或方法论。"},
     {"id": 93, "term": "Long-Lifecycle Agents (长生命周期智能体)", "module": "前沿与趋势层", "status": "active", "added_date": "2026-06-19", "source": "arXiv", "note": "指能够持续探索环境并解决长期任务序列，具有跨领域泛化能力的LLM驱动AI智能体。"},
-    {"id": 94, "term": "前沿AI模型 (Frontier AI Models)", "module": "前沿与趋势层", "status": "active", "added_date": "2026-06-19", "source": "Agent1-早报-2026-06-19", "note": "指的是最先进、能力最强大、开发成本最高的AI模型，它们往往拥有新兴能力，可能带来系统性风险。"},
-    {"id": 95, "term": "AI原生网络 (AI-native networks)", "module": "前沿与趋势层", "status": "active", "added_date": "2026-06-19", "source": "Agent1-早报-2026-06-19", "note": "描述从设计之初就深度融合AI技术，以优化性能、自动化管理并提供智能服务的新一代网络架构。"},
-    {"id": 96, "term": "Mythos级AI模型 (Mythos-level AI model)", "module": "前沿与趋势层", "status": "active", "added_date": "2026-06-19", "source": "Agent1-早报-2026-06-19", "note": "指代像Anthropic Mythos系列那样，能力极为强大且可能具有新兴能力的尖端AI模型分类。"}
+    {"id": 94, "term": "前沿AI模型 (Frontier AI Models)", "module": "前沿与趋势层", "status": "active", "added_date": "2026-06-19", "source": "2026-06-19", "note": "指的是最先进、能力最强大、开发成本最高的AI模型，它们往往拥有新兴能力，可能带来系统性风险。"},
+    {"id": 95, "term": "AI原生网络 (AI-native networks)", "module": "前沿与趋势层", "status": "active", "added_date": "2026-06-19", "source": "2026-06-19", "note": "描述从设计之初就深度融合AI技术，以优化性能、自动化管理并提供智能服务的新一代网络架构。"},
+    {"id": 96, "term": "Mythos级AI模型 (Mythos-level AI model)", "module": "前沿与趋势层", "status": "active", "added_date": "2026-06-19", "source": "026-06-19", "note": "指代像Anthropic Mythos系列那样，能力极为强大且可能具有新兴能力的尖端AI模型分类。"},
+    {"id": 97, "term": "AI代理 (AI Agent)", "module": "工程与应用层", "status": "active", "added_date": "2026-06-20", "source": "2026-06-20", "note": "它能自主规划、执行一系列任务，就像一个能独立完成工作的智能助手。"},
+    {"id": 98, "term": "具身智能 (Embodied Intelligence)", "module": "前沿与趋势层", "status": "active", "added_date": "2026-06-20", "source": "2026-06-20", "note": "指具备物理形态，能够与现实世界进行交互，并在此过程中学习、适应和执行任务的AI系统。"},
+    {"id": 99, "term": "AI一人公司 (AI One-person Company)", "module": "产业与商业层", "status": "active", "added_date": "2026-06-20", "source": "2026-06-20", "note": "指个人创业者利用AI技术和平台要素实现独立运营，完成传统上需团队协作才能完成的任务的创新公司模式。"},
+    {"id": 100, "term": "世界模型 (World Model)", "module": "模型与技术层", "status": "active", "added_date": "2026-06-22", "source": "2026-06-22", "note": "一种AI模型，通过构建对世界的内部模拟或表征，使AI能够理解、预测并规划在复杂环境中的行动，常用于具身智能和通用AI领域。"},
+    {"id": 101, "term": "物理AI (Physical AI)", "module": "前沿与趋势层", "status": "active", "added_date": "2026-06-24", "source": "026-06-23", "note": "指AI发展从文本处理转向对真实物理世界的理解、模拟和行动，以进入更广阔的实体经济应用场景。"},
+    {"id": 102, "term": "模型蒸馏攻击 (Model Distillation Attack)", "module": "安全与治理层", "status": "active", "added_date": "2026-06-27", "source": "2026-06-27", "note": "一种大规模、非法提取大型AI模型能力的行为，通过虚假交互复制其核心技能。"},
+    {"id": 103, "term": "AI原生金融 (AI-native Finance)", "module": "产业与商业层", "status": "active", "added_date": "2026-06-28", "source": "2026-06-27", "note": "指金融服务从设计之初就以人工智能为核心构建，而非将AI作为附加功能。"},
+    {"id": 104, "term": "Token成本 (Token Cost)", "module": "模型与技术层", "status": "active", "added_date": "2026-06-29", "source": "2026-06-28", "note": "大语言模型处理和生成文本Token所产生的计算成本和经济成本。"},
+    {"id": 105, "term": "韬定律 (Tao's Law)", "module": "算力与基础设施层", "status": "active", "added_date": "2026-07-06", "source": "2026-07-05", "note": "华为提出的芯片性能提升理论，通过LogicFolding等技术实现同制程下芯片运行更快、更省电。"},
+    {"id": 106, "term": "推理努力 (Inference Effort)", "module": "模型与技术层", "status": "active", "added_date": "2026-07-14", "source": "2026-07-14", "note": "OpenAI模型中的可调节机制，用于平衡AI推理的成本和性能。"},
+    {"id": 107, "term": "端侧生成式人工智能服务 (On-device Generative AI Service)", "module": "工程与应用层", "status": "active", "added_date": "2026-07-16", "source": "2026-07-15", "note": "指在移动设备等终端本地运行并提供生成式AI能力的服务。"},
+    {"id": 108, "term": "缰绳工程 (Harness Engineering)", "module": "工程与应用层", "status": "active", "added_date": "2026-07-17", "source": "Latent Space, TLDR AI", "note": "一种围绕AI智能体设计的系统方法，强调对智能体工作流、权限、上下文管理和评估循环进行整体设计，以确保系统的可靠性和可控性。"},
+    {"id": 109, "term": "认知状态复制 (Epistemic State Replication, ESR)", "module": "前沿与趋势层", "status": "active", "added_date": "2026-07-17", "source": "arXiv (via AISurfing)", "note": "针对智能体分布式系统的一种信念复制层，使概率性智能体能够就其信念而非精确位状态达成一致，以解决经典状态机复制的局限性。"},
+    {"id": 110, "term": "AI智能体手机 (AI Agent Phone)", "module": "工程与应用层", "status": "active", "added_date": "2026-07-18", "source": "2026-07-18", "note": "以高级AI智能体为核心，能够感知环境并执行复杂任务的新型智能手机。"},
+    {"id": 111, "term": "生成式引擎优化 (Generative Engine Optimization, GEO)", "module": "产业与商业层", "status": "active", "added_date": "2026-08-04", "source": "2026-08-04", "note": "一种面向生成式人工智能的内容优化方法，目的是提高内容在AI应用答案中的出现概率和排名。"},
+    {"id": 112, "term": "企业级Agent (Enterprise-grade Agent)", "module": "工程与应用层", "status": "active", "added_date": "2026-08-04", "source": "2026-08-04", "note": "专为企业应用设计，具备编程和专业办公能力，能够自主执行任务并提升企业生产力的AI智能体产品。"},
+    {"id": 113, "term": "自主AI攻击 (Autonomous AI Attacks)", "module": "安全与治理层", "status": "active", "added_date": "2026-08-07", "source": "2026-08-07", "note": "指人工智能模型在无人干预下，自主突破安全环境并对目标网络或系统发起攻击的行为。"},
+    {"id": 114, "term": "自主AI红队 (Autonomous AI Red Teaming)", "module": "安全与治理层", "status": "active", "added_date": "2026-08-07", "source": "OpenAI / Meta (网络安全事件报道)", "note": "指AI模型在无人干预下自主进行网络渗透测试，发现并利用安全漏洞，以评估AI系统的安全边界。"},
+    {"id": 115, "term": "AI模型越狱 (AI Model Jailbreak)", "module": "安全与治理层", "status": "active", "added_date": "2026-08-10", "source": "2026-08-10", "note": "指AI模型被诱导或操控，从而绕过其安全限制和预期行为的事件或过程。"},
+    {"id": 116, "term": "词元经济 (Token Economy, AI Computing Power)", "module": "产业与商业层", "status": "active", "added_date": "2026-08-16", "source": "2026-08-16", "note": "一种以AI算力Token的产出和消耗量为核心，衡量企业价值并提供融资支持的经济模式。"}
+]
   ]
 }
