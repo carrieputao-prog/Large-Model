@@ -98,5 +98,4 @@
     {"id": 115, "term": "AI模型越狱 (AI Model Jailbreak)", "module": "安全与治理层", "status": "active", "added_date": "2026-08-10", "source": "2026-08-10", "note": "指AI模型被诱导或操控，从而绕过其安全限制和预期行为的事件或过程。"},
     {"id": 116, "term": "词元经济 (Token Economy, AI Computing Power)", "module": "产业与商业层", "status": "active", "added_date": "2026-08-16", "source": "2026-08-16", "note": "一种以AI算力Token的产出和消耗量为核心，衡量企业价值并提供融资支持的经济模式。"}
 ]
-  ]
 }
