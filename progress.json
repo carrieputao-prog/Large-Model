@@ -1,14 +1,14 @@
 {
-  "current_index": 25,
+  "current_index": 26,
   "module_indexes": {
-    "基础认知层": 25,
-    "工程与应用层": 25,
-    "前沿与趋势层": 25
+    "基础认知层": 26,
+    "工程与应用层": 26,
+    "前沿与趋势层": 26
   },
   "round": 2,
   "total_topics": 74,
   "started_date": "2026-06-18",
-  "last_updated": "2026-08-24",
+  "last_updated": "2026-08-25",
   "daily_log": [
     {
       "date": "2026-06-18",
@@ -903,6 +903,24 @@
         {
           "module": "前沿与趋势层",
           "term": "Long-Lifecycle Agents (长生命周期智能体)"
+        }
+      ]
+    },
+    {
+      "date": "2026-08-25",
+      "day_index": 25,
+      "terms": [
+        {
+          "module": "基础认知层",
+          "term": "Attention 机制（注意力）"
+        },
+        {
+          "module": "工程与应用层",
+          "term": "端侧生成式人工智能服务 (On-device Generative AI Service)"
+        },
+        {
+          "module": "前沿与趋势层",
+          "term": "前沿AI模型 (Frontier AI Models)"
         }
       ]
     }
