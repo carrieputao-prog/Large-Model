@@ -97,6 +97,6 @@
     {"id": 114, "term": "自主AI红队 (Autonomous AI Red Teaming)", "module": "安全与治理层", "status": "active", "added_date": "2026-08-07", "source": "OpenAI / Meta (网络安全事件报道)", "note": "指AI模型在无人干预下自主进行网络渗透测试，发现并利用安全漏洞，以评估AI系统的安全边界。"},
     {"id": 115, "term": "AI模型越狱 (AI Model Jailbreak)", "module": "安全与治理层", "status": "active", "added_date": "2026-08-10", "source": "2026-08-10", "note": "指AI模型被诱导或操控，从而绕过其安全限制和预期行为的事件或过程。"},
     {"id": 116, "term": "词元经济 (Token Economy, AI Computing Power)", "module": "产业与商业层", "status": "active", "added_date": "2026-08-16", "source": "2026-08-16", "note": "一种以AI算力Token的产出和消耗量为核心，衡量企业价值并提供融资支持的经济模式。"},
-    {"id": 89, "term": "智能体运行框架（Agent Harness）", "module": "前沿与趋势层", "status": "active", "added_date": "2026-08-31", "source": "initial"}
+    {"id": 117, "term": "智能体运行框架（Agent Harness）", "module": "前沿与趋势层", "status": "active", "added_date": "2026-08-31", "source": "initial"}
 ]
 }
