@@ -72,7 +72,7 @@
     {"id": 89, "term": "AI Native 应用", "module": "前沿与趋势层", "status": "active", "added_date": "2026-06-18", "source": "initial"},
     {"id": 90, "term": "小模型 vs 大模型趋势", "module": "前沿与趋势层", "status": "active", "added_date": "2026-06-18", "source": "initial"},
     {"id": 91, "term": "FDE（AI Forward Deployed Engineer）", "module": "前沿与趋势层", "status": "active", "added_date": "2026-06-18", "source": "user_manual", "note": "Palantir提出：既指嵌入客户现场的AI技术角色，也指在Foundry平台运行的AI交互智能体"},
-    {"id": 92, "term": "Loop Engineer (循环工程师)", "module": "工程与应用层", "status": "active", "added_date": "2026-06-19", "source": "清华姜学长 B站", "note": "指设计和优化AI系统中循环反馈机制的工程师或方法论。"},
+    {"id": 92, "term": "循环工程（Loop Engineering）", "module": "前沿与趋势层", "status": "active", "added_date": "2026-08-31", "source": "initial"},
     {"id": 93, "term": "Long-Lifecycle Agents (长生命周期智能体)", "module": "前沿与趋势层", "status": "active", "added_date": "2026-06-19", "source": "arXiv", "note": "指能够持续探索环境并解决长期任务序列，具有跨领域泛化能力的LLM驱动AI智能体。"},
     {"id": 94, "term": "前沿AI模型 (Frontier AI Models)", "module": "前沿与趋势层", "status": "active", "added_date": "2026-06-19", "source": "2026-06-19", "note": "指的是最先进、能力最强大、开发成本最高的AI模型，它们往往拥有新兴能力，可能带来系统性风险。"},
     {"id": 95, "term": "AI原生网络 (AI-native networks)", "module": "前沿与趋势层", "status": "active", "added_date": "2026-06-19", "source": "2026-06-19", "note": "描述从设计之初就深度融合AI技术，以优化性能、自动化管理并提供智能服务的新一代网络架构。"},
@@ -96,6 +96,7 @@
     {"id": 113, "term": "自主AI攻击 (Autonomous AI Attacks)", "module": "安全与治理层", "status": "active", "added_date": "2026-08-07", "source": "2026-08-07", "note": "指人工智能模型在无人干预下，自主突破安全环境并对目标网络或系统发起攻击的行为。"},
     {"id": 114, "term": "自主AI红队 (Autonomous AI Red Teaming)", "module": "安全与治理层", "status": "active", "added_date": "2026-08-07", "source": "OpenAI / Meta (网络安全事件报道)", "note": "指AI模型在无人干预下自主进行网络渗透测试，发现并利用安全漏洞，以评估AI系统的安全边界。"},
     {"id": 115, "term": "AI模型越狱 (AI Model Jailbreak)", "module": "安全与治理层", "status": "active", "added_date": "2026-08-10", "source": "2026-08-10", "note": "指AI模型被诱导或操控，从而绕过其安全限制和预期行为的事件或过程。"},
-    {"id": 116, "term": "词元经济 (Token Economy, AI Computing Power)", "module": "产业与商业层", "status": "active", "added_date": "2026-08-16", "source": "2026-08-16", "note": "一种以AI算力Token的产出和消耗量为核心，衡量企业价值并提供融资支持的经济模式。"}
+    {"id": 116, "term": "词元经济 (Token Economy, AI Computing Power)", "module": "产业与商业层", "status": "active", "added_date": "2026-08-16", "source": "2026-08-16", "note": "一种以AI算力Token的产出和消耗量为核心，衡量企业价值并提供融资支持的经济模式。"},
+    {"id": 89, "term": "智能体运行框架（Agent Harness）", "module": "前沿与趋势层", "status": "active", "added_date": "2026-08-31", "source": "initial"}
 ]
 }
