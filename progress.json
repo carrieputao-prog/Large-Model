@@ -1,9 +1,9 @@
 {
-  "current_index": 27,
+  "current_index": 28,
   "module_indexes": {
-    "基础认知层": 27,
-    "工程与应用层": 27,
-    "前沿与趋势层": 27
+    "基础认知层": 28,
+    "工程与应用层": 28,
+    "前沿与趋势层": 28
   },
   "round": 2,
   "total_topics": 74,
@@ -935,6 +935,24 @@
         {
           "module": "工程与应用层",
           "term": "缰绳工程 (Harness Engineering)"
+        },
+        {
+          "module": "前沿与趋势层",
+          "term": "AI原生网络 (AI-native networks)"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-01",
+      "day_index": 27,
+      "terms": [
+        {
+          "module": "基础认知层",
+          "term": "位置编码（Positional Encoding）"
+        },
+        {
+          "module": "工程与应用层",
+          "term": "企业级Agent (Enterprise-grade Agent)"
         },
         {
           "module": "前沿与趋势层",
