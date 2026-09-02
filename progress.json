@@ -1,14 +1,14 @@
 {
-  "current_index": 28,
+  "current_index": 29,
   "module_indexes": {
-    "基础认知层": 28,
-    "工程与应用层": 28,
-    "前沿与趋势层": 28
+    "基础认知层": 29,
+    "工程与应用层": 29,
+    "前沿与趋势层": 29
   },
   "round": 2,
   "total_topics": 74,
   "started_date": "2026-06-18",
-  "last_updated": "2026-09-01",
+  "last_updated": "2026-09-02",
   "daily_log": [
     {
       "date": "2026-06-18",
@@ -957,6 +957,24 @@
         {
           "module": "前沿与趋势层",
           "term": "AI原生网络 (AI-native networks)"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-02",
+      "day_index": 28,
+      "terms": [
+        {
+          "module": "基础认知层",
+          "term": "预训练（Pre-training）"
+        },
+        {
+          "module": "工程与应用层",
+          "term": "大模型原生 (Large Model Native)"
+        },
+        {
+          "module": "前沿与趋势层",
+          "term": "Mythos级AI模型 (Mythos-level AI model)"
         }
       ]
     }
