@@ -1,14 +1,14 @@
 {
-  "current_index": 29,
+  "current_index": 30,
   "module_indexes": {
-    "基础认知层": 29,
-    "工程与应用层": 29,
-    "前沿与趋势层": 29
+    "基础认知层": 30,
+    "工程与应用层": 30,
+    "前沿与趋势层": 30
   },
   "round": 2,
   "total_topics": 74,
   "started_date": "2026-06-18",
-  "last_updated": "2026-09-02",
+  "last_updated": "2026-09-03",
   "daily_log": [
     {
       "date": "2026-06-18",
@@ -975,6 +975,24 @@
         {
           "module": "前沿与趋势层",
           "term": "Mythos级AI模型 (Mythos-level AI model)"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-03",
+      "day_index": 29,
+      "terms": [
+        {
+          "module": "基础认知层",
+          "term": "监督微调（SFT）"
+        },
+        {
+          "module": "工程与应用层",
+          "term": "Loop Engineering (循环工程)"
+        },
+        {
+          "module": "前沿与趋势层",
+          "term": "具身智能 (Embodied Intelligence)"
         }
       ]
     }
