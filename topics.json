@@ -78,6 +78,7 @@
     {"id": 144, "term": "长程编程 (Long-Range Programming)", "module": "工程与应用层", "status": "active", "added_date": "2026-06-21", "source": "中国AI里程碑！智谱GLM 5.2模型智能指数冲入全球前三-早报-2026-06-21", "note": "指AI模型处理超长代码上下文，并持续完成多步骤复杂编程任务的能力。"},
     {"id": 145, "term": "Agent Zero Memory", "module": "智能体与自动化层", "status": "active", "added_date": "2026-09-04", "source": "Agent1-早报-2026-09-04", "note": "指没有长期记忆、主要根据当前输入和当前上下文进行判断与行动的AI智能体架构。"},
     {"id": 146, "term": "专业网络安全AI模型 (Specialized Cybersecurity AI Model)", "module": "工程与应用层", "status": "active", "added_date": "2026-09-04", "source": "AI Intelligence Briefing", "note": "一种专门面向漏洞检测、攻击分析和自动化补丁等网络安全任务优化的AI模型。"},
-    {"id": 147, "term": "门控安全模型发布 (Gated Security Model Release)", "module": "安全与治理层", "status": "active", "added_date": "2026-09-04", "source": "AI Intelligence Briefing", "note": "一种对具备安全敏感能力的前沿AI模型进行限制性发布的策略，仅向经过审核的防御人员或机构提供访问权限，而不普遍开放API。"}
+    {"id": 147, "term": "门控安全模型发布 (Gated Security Model Release)", "module": "安全与治理层", "status": "active", "added_date": "2026-09-04", "source": "AI Intelligence Briefing", "note": "一种对具备安全敏感能力的前沿AI模型进行限制性发布的策略，仅向经过审核的防御人员或机构提供访问权限，而不普遍开放API。"},
+    {"id": 148, "term": "长程任务（Long-Horizon Tasks）", "module": "工程与应用层", "status": "active", "added_date": "2026-09-04", "source": "initial"}
 ]
 }
