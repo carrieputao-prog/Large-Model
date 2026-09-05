@@ -17,16 +17,30 @@ DINGTALK_SECRET  = os.environ["DINGTALK_SECRET"]
 
 # ── 时间段映射（北京时间小时 → 推送风格） ──────────────
 SLOT_CONFIG = {
-    3:  {"label": "晨读", "emoji": "🌅", "module": "基础认知层", "style": "偏重概念理解，适合早晨清醒头脑，语言简洁有力"},
-    12: {"label": "午间", "emoji": "☀️", "module": "工程与应用层", "style": "偏重实际应用和业务举例，适合中午快速充电"},
-    18: {"label": "晚间", "emoji": "🌙", "module": "前沿与趋势层", "style": "语言轻松有趣，适合傍晚回味，结尾留一个思考题"},
+    3:  {"label": "晨读", "emoji": "🌅", "style": "偏重概念理解，适合早晨清醒头脑，语言简洁有力"},
+    12: {"label": "午间", "emoji": "☀️", "style": "偏重实际应用和业务举例，适合中午快速充电"},
+    18: {"label": "晚间", "emoji": "🌙", "style": "语言轻松有趣，适合傍晚回味，结尾留一个思考题"},
 }
-ALLOWED_MODULES = ["基础认知层", "工程与应用层", "前沿与趋势层"]
+WEEKLY_MODULE_PLAN = {
+    0: {3: "基础认知层", 12: "工程与应用层", 18: "产品与应用层"},
+    1: {3: "模型与技术层", 12: "智能体与自动化层", 18: "产业与商业层"},
+    2: {3: "工程与应用层", 12: "产品与应用层", 18: "前沿与趋势层"},
+    3: {3: "模型与技术层", 12: "智能体与自动化层", 18: "安全与治理层"},
+    4: {3: "工程与应用层", 12: "产品与应用层", 18: "产业与商业层"},
+    5: {3: "模型与技术层", 12: "工程与应用层", 18: "智能体与自动化层"},
+    6: {3: "安全与治理层", 12: "算力与基础设施层", 18: "前沿与趋势层"},
+}
+ALLOWED_MODULES = sorted({
+    module
+    for day_plan in WEEKLY_MODULE_PLAN.values()
+    for module in day_plan.values()
+})
 
 # ── 文件路径 ──────────────────────────────────────────
 BASE_DIR      = os.path.dirname(os.path.abspath(__file__))
 TOPICS_FILE   = os.path.join(BASE_DIR, "topics.json")
 PROGRESS_FILE = os.path.join(BASE_DIR, "progress.json")
+MODULE_ALERTS_FILE = os.path.join(BASE_DIR, "module_alerts.json")
 BEIJING_TZ = ZoneInfo("Asia/Shanghai")
 
 
@@ -72,6 +86,11 @@ def get_active_topics(topics_data):
     ]
 
 
+def get_current_module(progress_data, slot):
+    day_idx = progress_data.get("current_index", 0) % len(WEEKLY_MODULE_PLAN)
+    return WEEKLY_MODULE_PLAN[day_idx][slot]
+
+
 def get_topics_by_module(topics_data):
     """按保留分类拆分 active 词条，保持 topics.json 中的原始顺序。"""
     topics_by_module = {module: [] for module in ALLOWED_MODULES}
@@ -91,11 +110,10 @@ def get_module_indexes(progress_data):
 
 def get_topic_for_slot(topics_data, progress_data, slot):
     """
-    一天3次，每个时段固定推一个分类：
-    03:00 基础认知层、12:00 工程与应用层、18:00 前沿与趋势层。
+    一天3次，每个时段按 WEEKLY_MODULE_PLAN 选择一个知识层。
     每个分类独立维护取词索引。
     """
-    module = SLOT_CONFIG[slot]["module"]
+    module = get_current_module(progress_data, slot)
     topics_by_module = get_topics_by_module(topics_data)
     module_topics = topics_by_module[module]
     if not module_topics:
@@ -109,14 +127,16 @@ def get_topic_for_slot(topics_data, progress_data, slot):
 
 
 def advance_progress(progress_data, topics_data, slot):
-    """最后一个时段（18点）推送完后，day_index+1"""
+    """最后一个时段（18点）推送完后，推进当天实际排期的三个层。"""
     if slot != 18:
         return progress_data
     today_str = beijing_today()
     topics_by_module = get_topics_by_module(topics_data)
     module_indexes = get_module_indexes(progress_data)
+    day_idx = progress_data.get("current_index", 0) % len(WEEKLY_MODULE_PLAN)
+    modules_today = list(WEEKLY_MODULE_PLAN[day_idx].values())
     terms_today = []
-    for module in ALLOWED_MODULES:
+    for module in modules_today:
         module_topics = topics_by_module[module]
         idx = module_indexes[module] % len(module_topics)
         topic = module_topics[idx]
@@ -132,15 +152,63 @@ def advance_progress(progress_data, topics_data, slot):
         "terms": terms_today
     })
     progress_data["current_index"] += 1
-    # 三个分类独立轮转，最长分类跑完视作一轮完成
+    # 各层索引独立长期递增，取词时用取模循环，避免低频层还没学完就被重置。
     days_per_round = max(len(items) for items in topics_by_module.values())
-    if progress_data["current_index"] >= days_per_round:
-        progress_data["current_index"] = 0
+    if progress_data["current_index"] > 0 and progress_data["current_index"] % days_per_round == 0:
         progress_data["round"] += 1
-        for module in ALLOWED_MODULES:
-            module_indexes[module] = 0
     progress_data["last_updated"] = today_str
     return progress_data
+
+
+def check_unplanned_modules(topics_data):
+    topic_modules = {}
+    for topic in topics_data["topics"]:
+        module = topic.get("module")
+        if topic.get("status") == "active" and module:
+            topic_modules[module] = topic_modules.get(module, 0) + 1
+
+    planned_modules = set(ALLOWED_MODULES)
+    unplanned = {
+        module: count
+        for module, count in topic_modules.items()
+        if module not in planned_modules
+    }
+    if not unplanned:
+        return
+
+    alerts_data = {"alerted_modules": []}
+    if os.path.exists(MODULE_ALERTS_FILE):
+        alerts_data = load_json(MODULE_ALERTS_FILE)
+    alerted_modules = set(alerts_data.get("alerted_modules", []))
+    new_modules = {
+        module: count
+        for module, count in unplanned.items()
+        if module not in alerted_modules
+    }
+    if not new_modules:
+        print(f"已知未纳入排期层：{sorted(unplanned)}")
+        return
+
+    lines = [
+        "⚠️ 大模型日课发现新知识层",
+        "",
+        "以下层级在 topics.json 中存在，但尚未加入推送排期：",
+    ]
+    for module, count in sorted(new_modules.items()):
+        lines.append(f"- {module}：{count} 个 active 词条")
+    lines.extend([
+        "",
+        "这些词条暂时不会被自动推送，请确认是否加入 WEEKLY_MODULE_PLAN。",
+    ])
+
+    try:
+        send_to_dingtalk("\n".join(lines))
+    except Exception as exc:
+        print(f"⚠️ 新知识层提醒发送失败：{exc}")
+
+    alerts_data["alerted_modules"] = sorted(alerted_modules | set(new_modules))
+    alerts_data["last_checked"] = beijing_today()
+    save_json(MODULE_ALERTS_FILE, alerts_data)
 
 
 def generate_knowledge(topic, slot, progress_data, topics_data, learned, total):
@@ -272,8 +340,11 @@ if __name__ == "__main__":
     topics_data   = load_json(TOPICS_FILE)
     progress_data = load_json(PROGRESS_FILE)
     slot          = get_slot()
+    module        = get_current_module(progress_data, slot)
 
-    print(f"当前时段：{SLOT_CONFIG[slot]['label']}（北京时间 {slot}:00，{SLOT_CONFIG[slot]['module']}）")
+    check_unplanned_modules(topics_data)
+
+    print(f"当前时段：{SLOT_CONFIG[slot]['label']}（北京时间 {slot}:00，{module}）")
 
     topic, idx, total, learned = get_topic_for_slot(topics_data, progress_data, slot)
     print(f"今日词条：{topic['term']}｜{topic['module']}（本分类第 {idx+1}/{total} 个）")
