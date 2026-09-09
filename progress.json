@@ -1,11 +1,11 @@
 {
-  "current_index": 4,
+  "current_index": 5,
   "module_indexes": {
     "基础认知层": 1,
-    "工程与应用层": 2,
+    "工程与应用层": 3,
     "前沿与趋势层": 1,
-    "产业与商业层": 1,
-    "产品与应用层": 2,
+    "产业与商业层": 2,
+    "产品与应用层": 3,
     "安全与治理层": 1,
     "智能体与自动化层": 2,
     "模型与技术层": 2,
@@ -14,7 +14,7 @@
   "round": 3,
   "total_topics": 74,
   "started_date": "2026-06-18",
-  "last_updated": "2026-09-08",
+  "last_updated": "2026-09-09",
   "daily_log": [
     {
       "date": "2026-06-18",
@@ -1089,6 +1089,24 @@
         {
           "module": "安全与治理层",
           "term": "模型蒸馏攻击 (Model Distillation Attack)"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-09",
+      "day_index": 4,
+      "terms": [
+        {
+          "module": "工程与应用层",
+          "term": "语义搜索 vs 关键词搜索"
+        },
+        {
+          "module": "产品与应用层",
+          "term": "AI PC (AI个人电脑)"
+        },
+        {
+          "module": "产业与商业层",
+          "term": "AI原生金融 (AI-native Finance)"
         }
       ]
     }
