@@ -1,20 +1,20 @@
 {
-  "current_index": 5,
+  "current_index": 6,
   "module_indexes": {
     "基础认知层": 1,
-    "工程与应用层": 3,
+    "工程与应用层": 4,
     "前沿与趋势层": 1,
     "产业与商业层": 2,
     "产品与应用层": 3,
     "安全与治理层": 1,
-    "智能体与自动化层": 2,
-    "模型与技术层": 2,
+    "智能体与自动化层": 3,
+    "模型与技术层": 3,
     "算力与基础设施层": 0
   },
   "round": 3,
   "total_topics": 74,
   "started_date": "2026-06-18",
-  "last_updated": "2026-09-09",
+  "last_updated": "2026-09-10",
   "daily_log": [
     {
       "date": "2026-06-18",
@@ -1107,6 +1107,24 @@
         {
           "module": "产业与商业层",
           "term": "AI原生金融 (AI-native Finance)"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-10",
+      "day_index": 5,
+      "terms": [
+        {
+          "module": "模型与技术层",
+          "term": "AI幻觉 (AI Hallucination)"
+        },
+        {
+          "module": "工程与应用层",
+          "term": "Reranker（重排序）"
+        },
+        {
+          "module": "智能体与自动化层",
+          "term": "AgentOS"
         }
       ]
     }
