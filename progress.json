@@ -1,11 +1,11 @@
 {
-  "current_index": 9,
+  "current_index": 10,
   "module_indexes": {
     "基础认知层": 2,
-    "工程与应用层": 5,
-    "前沿与趋势层": 2,
+    "工程与应用层": 6,
+    "前沿与趋势层": 3,
     "产业与商业层": 3,
-    "产品与应用层": 4,
+    "产品与应用层": 5,
     "安全与治理层": 2,
     "智能体与自动化层": 4,
     "模型与技术层": 4,
@@ -14,7 +14,7 @@
   "round": 3,
   "total_topics": 74,
   "started_date": "2026-06-18",
-  "last_updated": "2026-09-13",
+  "last_updated": "2026-09-15",
   "daily_log": [
     {
       "date": "2026-06-18",
@@ -1179,6 +1179,24 @@
         {
           "module": "产业与商业层",
           "term": "生成式引擎优化 (Generative Engine Optimization, GEO)"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-15",
+      "day_index": 9,
+      "terms": [
+        {
+          "module": "工程与应用层",
+          "term": "Agent（智能体）"
+        },
+        {
+          "module": "产品与应用层",
+          "term": "AI PC (AI个人电脑)"
+        },
+        {
+          "module": "前沿与趋势层",
+          "term": "推理模型（Reasoning Model）"
         }
       ]
     }
