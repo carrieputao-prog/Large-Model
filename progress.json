@@ -1,14 +1,14 @@
 {
-  "current_index": 10,
+  "current_index": 11,
   "module_indexes": {
     "基础认知层": 2,
     "工程与应用层": 6,
     "前沿与趋势层": 3,
     "产业与商业层": 3,
     "产品与应用层": 5,
-    "安全与治理层": 2,
-    "智能体与自动化层": 4,
-    "模型与技术层": 4,
+    "安全与治理层": 3,
+    "智能体与自动化层": 5,
+    "模型与技术层": 5,
     "算力与基础设施层": 1
   },
   "round": 3,
@@ -1197,6 +1197,24 @@
         {
           "module": "前沿与趋势层",
           "term": "推理模型（Reasoning Model）"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-15",
+      "day_index": 10,
+      "terms": [
+        {
+          "module": "模型与技术层",
+          "term": "边缘AI (Edge AI)"
+        },
+        {
+          "module": "智能体与自动化层",
+          "term": "AgentOS"
+        },
+        {
+          "module": "安全与治理层",
+          "term": "自主AI红队 (Autonomous AI Red Teaming)"
         }
       ]
     }
