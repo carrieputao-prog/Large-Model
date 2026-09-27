@@ -1,20 +1,20 @@
 {
-  "current_index": 21,
+  "current_index": 22,
   "module_indexes": {
-    "基础认知层": 3,
-    "工程与应用层": 12,
+    "基础认知层": 4,
+    "工程与应用层": 13,
     "前沿与趋势层": 6,
     "产业与商业层": 6,
-    "产品与应用层": 9,
+    "产品与应用层": 10,
     "安全与治理层": 6,
     "智能体与自动化层": 9,
     "模型与技术层": 9,
     "算力与基础设施层": 3
   },
-  "round": 3,
+  "round": 4,
   "total_topics": 74,
   "started_date": "2026-06-18",
-  "last_updated": "2026-09-26",
+  "last_updated": "2026-09-27",
   "daily_log": [
     {
       "date": "2026-06-18",
@@ -1395,6 +1395,24 @@
         {
           "module": "前沿与趋势层",
           "term": "上下文学习（In-context Learning）"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-27",
+      "day_index": 21,
+      "terms": [
+        {
+          "module": "基础认知层",
+          "term": "Attention 机制（注意力）"
+        },
+        {
+          "module": "工程与应用层",
+          "term": "GEO (Generative Engine Optimization，生成式引擎优化)"
+        },
+        {
+          "module": "产品与应用层",
+          "term": "AI PC (AI个人电脑)"
         }
       ]
     }
